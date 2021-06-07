@@ -6,6 +6,8 @@ We evaluated our approach using two baselines:
 
 CANet [1] (project is [here](https://github.com/icoz69/CaNet)) and PFENet [2] (project is [here](https://github.com/dvlab-research/PFENet)).
 
+Many thanks for their public project.
+
 We followed the same setting with them.
 
 You can follow the preparations of these two baselines, or you can find the running details in our documents.
