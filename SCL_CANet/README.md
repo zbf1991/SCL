@@ -1,4 +1,4 @@
-#SCL_CANet
+# SCL_CANet
 ## Training and Evaluating
 All training settings follow [CANet](https://github.com/icoz69/CaNet) [1].
 
