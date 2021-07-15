@@ -214,7 +214,7 @@ def main_worker(gpu, ngpus_per_node, argss):
             writer.add_scalar('mAcc_train', mAcc_train, epoch_log)
             writer.add_scalar('allAcc_train', allAcc_train, epoch_log)     
 
-        if args.evaluate and (epoch % 2 == 0 or (args.epochs<=50 and epoch%1==0)):
+        if args.evaluate and (epoch % 1 == 0 or (args.epochs<=50 and epoch%1==0)):
             loss_val, mIoU_val, mAcc_val, allAcc_val, class_miou = validate(val_loader, model, criterion)
             if main_process():
                 writer.add_scalar('loss_val', loss_val, epoch_log)

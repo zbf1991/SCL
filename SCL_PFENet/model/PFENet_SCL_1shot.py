@@ -5,10 +5,11 @@ import numpy as np
 import random
 import time
 import cv2
-
 import model.resnet as models
 import model.vgg as vgg_models
 import util.util as util
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 
 def Weighted_GAP(supp_feat, mask):
     supp_feat = supp_feat * mask
@@ -257,8 +258,8 @@ class PFENet(nn.Module):
 
         for idx, tmp_bin in enumerate(self.pyramid_bins):
             if tmp_bin <= 1.0:
-                bin = int(supp_feat_map.shape[2] * tmp_bin)
-                supp_feat_map_bin = nn.AdaptiveAvgPool2d(bin)(supp_feat_map)
+                supp_bin = int(supp_feat_map.shape[2] * tmp_bin)
+                supp_feat_map_bin = nn.AdaptiveAvgPool2d(supp_bin)(supp_feat_map)
             else:
                 bin = tmp_bin
                 supp_feat_map_bin = self.avgpool_list[idx](supp_feat_map)
@@ -269,7 +270,6 @@ class PFENet(nn.Module):
             merge_supp_feat_bin = self.supp_init_merge[idx](merge_supp_feat_bin)
 
             if idx >= 1:
-                # notice here we used the previous feature map.
                 pre_supp_feat_bin = supp_pyramid_feat_list[idx-1].clone()
                 pre_supp_feat_bin = F.interpolate(pre_supp_feat_bin, size=(bin, bin), mode='bilinear', align_corners=True)
                 rec_supp_feat_bin = torch.cat([merge_supp_feat_bin, pre_supp_feat_bin], 1)
@@ -293,8 +293,8 @@ class PFENet(nn.Module):
             new_supp_pyramid_feat_list = []
             for idx, tmp_bin in enumerate(self.pyramid_bins):
                 if tmp_bin <= 1.0:
-                    bin = int(supp_feat_map.shape[2] * tmp_bin)
-                    supp_feat_map_bin = nn.AdaptiveAvgPool2d(bin)(supp_feat_map)
+                    supp_bin = int(supp_feat_map.shape[2] * tmp_bin)
+                    supp_feat_map_bin = nn.AdaptiveAvgPool2d(supp_bin)(supp_feat_map)
                 else:
                     bin = tmp_bin
                     supp_feat_map_bin = self.avgpool_list[idx](supp_feat_map)
@@ -306,6 +306,7 @@ class PFENet(nn.Module):
                 merge_supp_feat_bin = self.supp_init_merge[idx](merge_supp_feat_bin)
 
                 if idx >= 1:
+                    # note here we used the previous feature
                     pre_supp_feat_bin = supp_pyramid_feat_list[idx-1].clone()
                     pre_supp_feat_bin = F.interpolate(pre_supp_feat_bin, size=(bin, bin), mode='bilinear', align_corners=True)
                     rec_supp_feat_bin = torch.cat([merge_supp_feat_bin, pre_supp_feat_bin], 1)

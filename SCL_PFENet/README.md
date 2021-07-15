@@ -4,6 +4,8 @@ We follow the same setting with the paper [**PFENet: Prior Guided Feature Enrich
 This file is mainly follow the same instruction with [PFENet](https://github.com/dvlab-research/PFENet) 
 
 All our final model can be found in [here](https://drive.google.com/drive/folders/1tkLCJ9j8rsJDgehcHNR-zWd0yaEiDPHR?usp=sharing)
+
+We used one 2080Ti with pytorch 1.3/1.4 (1.3 seems more stable).
 # Get Started
 
 ### Environment
@@ -62,4 +64,4 @@ Execute this command at the root directory:
 
 ### Note
 
-In "PFENet_SCL_1shot.py", Line 273, we used the previous feature map instead of the current feature map.
+In "PFENet_SCL_1shot.py", Line 310, we used the previous feature map instead of the current feature map.
