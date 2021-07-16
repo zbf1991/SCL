@@ -5,7 +5,7 @@ This file is mainly follow the same instruction with [PFENet](https://github.com
 
 All our final model can be found in [here](https://drive.google.com/drive/folders/1tkLCJ9j8rsJDgehcHNR-zWd0yaEiDPHR?usp=sharing)
 
-We used one 2080Ti with pytorch 1.3/1.4 (1.3 seems more stable).
+We used one 2080Ti with pytorch 1.3/1.4 (1.3 seems more stable). 1080Ti is also okay with pytorch1.4 (not test on 1.3).
 # Get Started
 
 ### Environment
